@@ -1,0 +1,56 @@
+name: gaimzone
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  convex_bottom_bar: ^3.2.0
+  contained_tab_bar_view: ^0.8.0
+  circular_countdown_timer: ^0.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^4.0.0
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/PoppinsLight.ttf
+        - asset: assets/fonts/PoppinsRegular.ttf
+        - asset: assets/fonts/PoppinsMedium.ttf
+        - asset: assets/fonts/PoppinsSemiBold.ttf
+        - asset: assets/fonts/PoppinsBold.ttf
+
+    - family: Lufga
+      fonts:
+        - asset: assets/fonts/LufgaLight.ttf
+        - asset: assets/fonts/LufgaRegular.ttf
+        - asset: assets/fonts/LufgaMedium.ttf
+        - asset: assets/fonts/LufgaSemiBold.ttf
+        - asset: assets/fonts/LufgaBold.ttf
+
+
