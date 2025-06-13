@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gaimzone/utils/colors.dart';
+import 'package:gaimzone/utils/theme.dart';
 
 import 'View/Screens/Auction/auction_screen.dart';
 
@@ -10,19 +10,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       title: 'Gaim Zone',
-      theme: ThemeData(
-        primaryColor: primaryBlue,
-        fontFamily: 'Lufga',
-        useMaterial3: true,
-        tabBarTheme: const TabBarTheme(dividerColor: Colors.transparent),
-      ),
-      home: const AuctionScreen(title: 'Auction'),
+      home: AuctionScreen(),
     );
   }
 }
-
