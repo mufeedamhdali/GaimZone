@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../Auction/auction_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => AuctionScreen()),
+        MaterialPageRoute(builder: (context) => const AuctionScreen()),
       );
     });
   }
