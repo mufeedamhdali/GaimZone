@@ -33,9 +33,7 @@ class _CloseConfirmSheetState extends State<CloseConfirmSheet> {
                   child: Icon(Icons.close,
                       size: 30,
                       color: Theme.of(context).colorScheme.surfaceDim)),
-              const SizedBox(
-                height: 10,
-              ),
+              Dimensions.verticalSpace(10),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,17 +49,13 @@ class _CloseConfirmSheetState extends State<CloseConfirmSheet> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  Dimensions.verticalSpace(10),
                   const Text(
                     "Do you want to CLOSE betting on this Auction?",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  Dimensions.verticalSpace(20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -108,9 +102,7 @@ class _CloseConfirmSheetState extends State<CloseConfirmSheet> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
+                  Dimensions.verticalSpace(30),
                 ],
               ),
             ],

@@ -102,3 +102,6 @@ windows/build/
 # Exceptions
 !pubspec.yaml
 !pubspec.lock
+
+# FVM Version Cache
+.fvm/

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../Auction/auction_screen.dart';
 
 class SplashScreen extends StatefulWidget {
+  static const routeName = '/splash_screen';
   const SplashScreen({super.key});
 
   @override

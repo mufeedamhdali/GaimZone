@@ -12,7 +12,12 @@ class Dimensions {
     return MediaQuery.of(context).size.height;
   }
 
-  static double appBarHeight() => 70;
+  static const double appBarHeight = 60;
+  static const double backgroundHeight = 660;
+  static const double topPadding = 57;
+
+  static SizedBox verticalSpace(double space) => SizedBox(height: space);
+  static SizedBox horizontalSpace(double space) => SizedBox(width: space);
 
   static double largeCircleWidth(BuildContext context) =>
       Dimensions.screenWidth(context) * 0.22;
@@ -22,8 +27,6 @@ class Dimensions {
 
   static double collapsedCircleWidth(BuildContext context) =>
       Dimensions.screenWidth(context) * .18;
-
-  static double backgroundHeight() => 660;
 }
 
 class AppState {

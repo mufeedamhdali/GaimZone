@@ -6,14 +6,16 @@ import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:gaimzone/View/Screens/Auction/close_confirm_sheet.dart';
 import 'package:gaimzone/View/Screens/Auction/collapsed_view.dart';
 import 'package:gaimzone/View/Screens/Auction/expanded_view.dart';
-import 'package:gaimzone/View/Screens/Auction/settings_sheet.dart';
-import 'package:gaimzone/View/Screens/Auction/tab_view.dart';
+import 'package:gaimzone/View/Screens/Auction/Settings/settings_sheet.dart';
+import 'package:gaimzone/View/Screens/Auction/squads_view.dart';
 import 'package:gaimzone/View/Widgets/custom_fab.dart';
 import 'package:gaimzone/utils/images.dart';
 
 import 'package:gaimzone/utils/colors.dart';
 
 import '../../../utils/constants.dart';
+import 'activities_view.dart';
+import 'all_players_view.dart';
 
 class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar tabBar;
@@ -49,6 +51,7 @@ class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class AuctionScreen extends StatefulWidget {
+  static const routeName = '/auction_screen';
   const AuctionScreen({
     super.key,
   });
@@ -69,7 +72,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
 
   final confettiController = ConfettiController();
 
-  String auctionStatus = AppState.getAuctionStatus("live");
+  String auctionStatus = "live";
 
   bool isLoading = true;
 
@@ -164,7 +167,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
         extendBodyBehindAppBar: true,
         backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(Dimensions.appBarHeight()),
+          preferredSize: const Size.fromHeight(Dimensions.appBarHeight),
           child: auctionTopBar(),
         ),
         body: NestedScrollView(
@@ -173,8 +176,8 @@ class _AuctionScreenState extends State<AuctionScreen> {
             return [
               SliverAppBar(
                 expandedHeight: auctionStatus == "closed"
-                    ? Dimensions.backgroundHeight() - 150
-                    : Dimensions.backgroundHeight(),
+                    ? Dimensions.backgroundHeight - 150
+                    : Dimensions.backgroundHeight,
                 collapsedHeight: 240,
                 pinned: true,
                 floating: false,
@@ -217,7 +220,13 @@ class _AuctionScreenState extends State<AuctionScreen> {
               ),
             ];
           },
-          body: TabView(isLoading: isLoading),
+          body: TabBarView(
+            children: [
+              ActivitiesView(isLoading: isLoading,),
+              SquadsView(isLoading: isLoading),
+              AllPlayersView(isLoading: isLoading),
+            ],
+          ),
         ),
         floatingActionButton: CustomFloatingActionButton(
             onPressedClose: showCloseConfirmation,
@@ -226,69 +235,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
     );
   }
 
-  Widget timeTicker(Color backgroundColor) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Theme.of(context).colorScheme.primary,
-              width: 1,
-            ),
-          ),
-          width: Dimensions.largeCircleWidth(context) * .8,
-          height: Dimensions.largeCircleWidth(context) * .8,
-        ),
-        Stack(
-          children: [
-            CircularCountDownTimer(
-              duration: 60,
-              initialDuration: 0,
-              controller: _countDownController,
-              width: Dimensions.largeCircleWidth(context) * .6,
-              height: Dimensions.largeCircleWidth(context) * .6,
-              ringColor: AppColors.darkGrey,
-              fillColor: Theme.of(context).colorScheme.tertiary,
-              backgroundColor: backgroundColor,
-              strokeWidth: 5,
-              strokeCap: StrokeCap.square,
-              textStyle: TextStyle(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.surfaceDim,
-                fontWeight: FontWeight.bold,
-              ),
-              textFormat: CountdownTextFormat.S,
-              isTimerTextShown: true,
-              isReverseAnimation: true,
-              isReverse: true,
-              autoStart: true,
-            ),
-            Positioned(
-              top: Dimensions.largeCircleWidth(context) * .35,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                width: Dimensions.largeCircleWidth(context) * .6,
-                height: 16,
-                color: Colors.transparent,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Sec",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        )
-      ],
-    );
-  }
+
 
   Widget collapsedWidget() {
     return CollapsedView(

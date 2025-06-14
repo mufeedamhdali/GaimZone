@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../utils/app_logger.dart';
-import '../../../utils/constants.dart';
+import '../../../../utils/app_logger.dart';
+import '../../../../utils/constants.dart';
 
 class ContactsSheet extends StatefulWidget {
   const ContactsSheet({super.key});
@@ -33,9 +33,7 @@ class _ContactsSheetState extends State<ContactsSheet> {
                 "Contact Franchise",
                 style: Theme.of(context).textTheme.titleMedium,
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              Dimensions.verticalSpace(10),
               Expanded(
                 child: ListView.builder(
                   itemCount: 20,
@@ -101,9 +99,7 @@ class _ContactsSheetState extends State<ContactsSheet> {
                   ),
                 ),
               ),
-              const SizedBox(
-                width: 10,
-              ),
+              Dimensions.verticalSpace(10),
               InkWell(
                 onTap: () => openDialer,
                 child: CircleAvatar(

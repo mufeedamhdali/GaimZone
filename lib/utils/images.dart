@@ -20,4 +20,5 @@ class AppImages {
   static const String bellIcon = 'assets/images/bell_icon.svg';
   static const String mapleLogo = 'assets/images/maple_logo.svg';
   static const String sliderImage = 'assets/images/slider_image.png';
+  static const String topCircle = 'assets/images/top_circle.svg';
 }

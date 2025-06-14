@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/images.dart';
+import '../../Widgets/time_ticker.dart';
 
 class CollapsedView extends StatefulWidget {
   final String auctionStatus;
@@ -44,15 +45,11 @@ class _CollapsedViewState extends State<CollapsedView> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 10,
-          ),
+          Dimensions.verticalSpace(10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const SizedBox(
-                width: 2,
-              ),
+              Dimensions.horizontalSpace(10),
               Container(
                 width: Dimensions.collapsedCircleWidth(context),
                 height: Dimensions.collapsedCircleWidth(context),
@@ -60,7 +57,7 @@ class _CollapsedViewState extends State<CollapsedView> {
                   shape: BoxShape.circle,
                   color: Colors.transparent,
                 ),
-                child: timeTicker(Colors.transparent),
+                child: CustomTimeTicker(backgroundColor: Colors.transparent, countDownController: widget.countDownController,),
               ),
               Container(
                 height: Dimensions.collapsedCircleWidth(context) * 1.1,
@@ -144,14 +141,10 @@ class _CollapsedViewState extends State<CollapsedView> {
                                 fontWeight: FontWeight.bold),
                           ),
                   )),
-              const SizedBox(
-                width: 2,
-              ),
+              Dimensions.horizontalSpace(10),
             ],
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          Dimensions.verticalSpace(8),
           Text(
             "Gurup Wamsi Kumar(Guru)",
             style: TextStyle(
@@ -281,70 +274,6 @@ class _CollapsedViewState extends State<CollapsedView> {
           )
         ],
       ),
-    );
-  }
-
-  Widget timeTicker(Color backgroundColor) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Theme.of(context).colorScheme.primary,
-              width: 1,
-            ),
-          ),
-          width: Dimensions.largeCircleWidth(context) * .8,
-          height: Dimensions.largeCircleWidth(context) * .8,
-        ),
-        Stack(
-          children: [
-            CircularCountDownTimer(
-              duration: 60,
-              initialDuration: 0,
-              controller: widget.countDownController,
-              width: Dimensions.largeCircleWidth(context) * .6,
-              height: Dimensions.largeCircleWidth(context) * .6,
-              ringColor: AppColors.darkGrey,
-              fillColor: Theme.of(context).colorScheme.tertiary,
-              backgroundColor: backgroundColor,
-              strokeWidth: 5,
-              strokeCap: StrokeCap.square,
-              textStyle: TextStyle(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.surfaceDim,
-                fontWeight: FontWeight.bold,
-              ),
-              textFormat: CountdownTextFormat.S,
-              isTimerTextShown: true,
-              isReverseAnimation: true,
-              isReverse: true,
-              autoStart: true,
-            ),
-            Positioned(
-              top: Dimensions.largeCircleWidth(context) * .35,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                width: Dimensions.largeCircleWidth(context) * .6,
-                height: 16,
-                color: Colors.transparent,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Sec",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        )
-      ],
     );
   }
 

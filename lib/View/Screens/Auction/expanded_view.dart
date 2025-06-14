@@ -4,11 +4,13 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gaimzone/utils/app_logger.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 import '../../../utils/colors.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/images.dart';
+import '../../Widgets/time_ticker.dart';
 
 class ExpandedView extends StatefulWidget {
   final String auctionStatus;
@@ -39,13 +41,15 @@ class _ExpandedViewState extends State<ExpandedView> {
 
   @override
   Widget build(BuildContext context) {
+    AppLogger.log("screenHeight: ${Dimensions.screenHeight(context)}");
+    AppLogger.log("screenWidth: ${Dimensions.screenWidth(context)}");
+    AppLogger.log("screenWidth: ${Dimensions.appBarHeight - 56}");
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          height: Dimensions.appBarHeight() +
-              Dimensions.screenHeight(context) * .06,
+          height:Dimensions.appBarHeight + Dimensions.screenHeight(context) *.05,
           width: Dimensions.screenWidth(context),
           color: Theme.of(context).colorScheme.primary,
         ),
@@ -137,9 +141,7 @@ class _ExpandedViewState extends State<ExpandedView> {
                                 width: 20,
                                 height: 20,
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
+                              Dimensions.horizontalSpace(5),
                               Text(
                                 "Mapple",
                                 style: Theme.of(context).textTheme.titleMedium,
@@ -188,6 +190,7 @@ class _ExpandedViewState extends State<ExpandedView> {
               children: [
                 Container(
                   height: 60,
+                  alignment: Alignment.bottomCenter,
                   decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.primary,
                       borderRadius: const BorderRadius.only(
@@ -208,31 +211,42 @@ class _ExpandedViewState extends State<ExpandedView> {
                         Dimensions.curveWith(context),
                     height: Dimensions.largeCircleWidth(context) / 2,
                     child: Stack(
-                      alignment: Alignment.bottomCenter,
+                      alignment: Alignment.center,
                       children: [
+                        // Positioned(
+                        //   left: Dimensions.curveWith(context),
+                        //   bottom: 0,
+                        //   child: Container(
+                        //     alignment: Alignment.center,
+                        //     decoration: BoxDecoration(
+                        //       color: Theme.of(context).colorScheme.surface,
+                        //       borderRadius: BorderRadius.only(
+                        //         topLeft: Radius.circular(
+                        //             Dimensions.largeCircleWidth(context) / 2),
+                        //         topRight: Radius.circular(
+                        //             Dimensions.largeCircleWidth(context) / 2),
+                        //       ),
+                        //     ),
+                        //     width: Dimensions.largeCircleWidth(context),
+                        //     height: Dimensions.largeCircleWidth(context) / 2,
+                        //   ),
+                        // ),
                         Positioned(
-                          left: Dimensions.curveWith(context),
-                          bottom: 0,
-                          child: Container(
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.surface,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(
-                                    Dimensions.largeCircleWidth(context) / 2),
-                                topRight: Radius.circular(
-                                    Dimensions.largeCircleWidth(context) / 2),
-                              ),
+                          top: 0,
+                          child: SvgPicture.asset(
+                            AppImages.topCircle,
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).colorScheme.surface,
+                              BlendMode.srcIn,
                             ),
                             width: Dimensions.largeCircleWidth(context),
-                            height: Dimensions.largeCircleWidth(context) / 2,
+                            height: Dimensions.largeCircleWidth(context),
+                            fit: BoxFit.fitWidth,
                           ),
                         ),
                         Positioned(
-                          bottom: -12,
-                          right: Dimensions.curveWith(context) +
-                              Dimensions.largeCircleWidth(context) -
-                              15,
+                          bottom: -10,
+                          left: 1,
                           child: Transform(
                             transform: Matrix4.identity()..scale(-1.0, 1.0),
                             alignment: Alignment.center,
@@ -243,22 +257,20 @@ class _ExpandedViewState extends State<ExpandedView> {
                                 BlendMode.srcIn,
                               ),
                               width: Dimensions.curveWith(context),
-                              height: Dimensions.largeCircleWidth(context) * .5,
+                              height: Dimensions.largeCircleWidth(context) /2,
                               fit: BoxFit.fitWidth,
                             ),
                           ),
                         ),
                         Positioned(
-                            bottom: -12,
-                            left: Dimensions.curveWith(context) +
-                                Dimensions.largeCircleWidth(context) -
-                                15,
+                            bottom: -10,
+                            right: 1,
                             child: SvgPicture.asset(
                               colorFilter: ColorFilter.mode(
                                 Theme.of(context).colorScheme.surface,
                                 BlendMode.srcIn,
                               ),
-                              height: Dimensions.largeCircleWidth(context) * .5,
+                              height: Dimensions.largeCircleWidth(context)/2,
                               AppImages.rightCurve,
                               width: Dimensions.curveWith(context),
                               fit: BoxFit.fitWidth,
@@ -285,7 +297,11 @@ class _ExpandedViewState extends State<ExpandedView> {
                           width: Dimensions.largeCircleWidth(context) * .9,
                           height: Dimensions.largeCircleWidth(context) * .9,
                         ),
-                        timeTicker(Theme.of(context).colorScheme.surface),
+                        CustomTimeTicker(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.surface,
+                          countDownController: widget.countDownController,
+                        )
                       ],
                     ))
                 : Positioned(
@@ -441,9 +457,7 @@ class _ExpandedViewState extends State<ExpandedView> {
                                     ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 6,
-                          ),
+                          Dimensions.verticalSpace(6),
                           widget.isLoading
                               ? CustomShimmer.shimmerDefault(context,
                                   height: 20,
@@ -587,69 +601,69 @@ class _ExpandedViewState extends State<ExpandedView> {
     );
   }
 
-  Widget timeTicker(Color backgroundColor) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Theme.of(context).colorScheme.primary,
-              width: 1,
-            ),
-          ),
-          width: Dimensions.largeCircleWidth(context) * .8,
-          height: Dimensions.largeCircleWidth(context) * .8,
-        ),
-        Stack(
-          children: [
-            CircularCountDownTimer(
-              duration: 60,
-              initialDuration: 0,
-              controller: widget.countDownController,
-              width: Dimensions.largeCircleWidth(context) * .6,
-              height: Dimensions.largeCircleWidth(context) * .6,
-              ringColor: AppColors.darkGrey,
-              fillColor: Theme.of(context).colorScheme.tertiary,
-              backgroundColor: backgroundColor,
-              strokeWidth: 5,
-              strokeCap: StrokeCap.square,
-              textStyle: TextStyle(
-                fontSize: 20,
-                color: Theme.of(context).colorScheme.surfaceDim,
-                fontWeight: FontWeight.bold,
-              ),
-              textFormat: CountdownTextFormat.S,
-              isTimerTextShown: true,
-              isReverseAnimation: true,
-              isReverse: true,
-              autoStart: true,
-            ),
-            Positioned(
-              top: Dimensions.largeCircleWidth(context) * .35,
-              child: Container(
-                alignment: Alignment.bottomCenter,
-                width: Dimensions.largeCircleWidth(context) * .6,
-                height: 16,
-                color: Colors.transparent,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Sec",
-                      style: TextStyle(fontSize: 10),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        )
-      ],
-    );
-  }
+  // Widget timeTicker(Color backgroundColor) {
+  //   return Stack(
+  //     alignment: Alignment.center,
+  //     children: [
+  //       Container(
+  //         decoration: BoxDecoration(
+  //           color: backgroundColor,
+  //           shape: BoxShape.circle,
+  //           border: Border.all(
+  //             color: Theme.of(context).colorScheme.primary,
+  //             width: 1,
+  //           ),
+  //         ),
+  //         width: Dimensions.largeCircleWidth(context) * .8,
+  //         height: Dimensions.largeCircleWidth(context) * .8,
+  //       ),
+  //       Stack(
+  //         children: [
+  //           CircularCountDownTimer(
+  //             duration: 60,
+  //             initialDuration: 0,
+  //             controller: widget.countDownController,
+  //             width: Dimensions.largeCircleWidth(context) * .6,
+  //             height: Dimensions.largeCircleWidth(context) * .6,
+  //             ringColor: AppColors.darkGrey,
+  //             fillColor: Theme.of(context).colorScheme.tertiary,
+  //             backgroundColor: backgroundColor,
+  //             strokeWidth: 5,
+  //             strokeCap: StrokeCap.square,
+  //             textStyle: TextStyle(
+  //               fontSize: 20,
+  //               color: Theme.of(context).colorScheme.surfaceDim,
+  //               fontWeight: FontWeight.bold,
+  //             ),
+  //             textFormat: CountdownTextFormat.S,
+  //             isTimerTextShown: true,
+  //             isReverseAnimation: true,
+  //             isReverse: true,
+  //             autoStart: true,
+  //           ),
+  //           Positioned(
+  //             top: Dimensions.largeCircleWidth(context) * .35,
+  //             child: Container(
+  //               alignment: Alignment.bottomCenter,
+  //               width: Dimensions.largeCircleWidth(context) * .6,
+  //               height: 16,
+  //               color: Colors.transparent,
+  //               child: const Column(
+  //                 mainAxisAlignment: MainAxisAlignment.end,
+  //                 children: [
+  //                   Text(
+  //                     "Sec",
+  //                     style: TextStyle(fontSize: 10),
+  //                   )
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       )
+  //     ],
+  //   );
+  // }
 
   Widget playerImageView() {
     return Container(
@@ -905,9 +919,7 @@ class _ExpandedViewState extends State<ExpandedView> {
                     fontSize: 15,
                     fontWeight: FontWeight.bold),
               ),
-              const SizedBox(
-                width: 10,
-              ),
+              Dimensions.horizontalSpace(10),
               Text(
                 label,
                 style: const TextStyle(
@@ -1016,9 +1028,7 @@ class _ExpandedViewState extends State<ExpandedView> {
                 ),
               ],
             )),
-        const SizedBox(
-          height: 10,
-        ),
+        Dimensions.verticalSpace(10),
         SizedBox(
           height: 240,
           width: Dimensions.screenWidth(context),
@@ -1052,23 +1062,17 @@ class _ExpandedViewState extends State<ExpandedView> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 3,
-                            ),
+                            Dimensions.verticalSpace(3),
                             Text(
                               "Title",
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
-                            const SizedBox(
-                              height: 3,
-                            ),
+                            Dimensions.verticalSpace(3),
                             Text(
                               "Sub Title",
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
-                            const SizedBox(
-                              height: 3,
-                            ),
+                            Dimensions.verticalSpace(3),
                           ],
                         ),
                       )
@@ -1105,9 +1109,7 @@ class _ExpandedViewState extends State<ExpandedView> {
                                 )
                               ],
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
+                            Dimensions.verticalSpace(5),
                             Text(
                               "Srinath Singh",
                               style: Theme.of(context).textTheme.titleMedium,
@@ -1123,9 +1125,7 @@ class _ExpandedViewState extends State<ExpandedView> {
             ),
           ),
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        Dimensions.verticalSpace(10),
         Container(
             padding: const EdgeInsets.all(10),
             width: Dimensions.screenWidth(context) * .9,

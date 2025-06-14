@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gaimzone/View/Screens/Auction/contacts_sheet.dart';
+import 'package:gaimzone/View/Screens/Auction/Settings/contacts_sheet.dart';
 import 'package:gaimzone/View/Widgets/custom_button.dart';
 import 'package:intl/intl.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:widget_tooltip/widget_tooltip.dart';
 
-import '../../../utils/colors.dart';
-import '../../../utils/constants.dart';
-import '../../../utils/images.dart';
+import '../../../../utils/colors.dart';
+import '../../../../utils/constants.dart';
+import '../../../../utils/images.dart';
 
 class SettingsSheet extends StatefulWidget {
   final String auctionStatus;
@@ -76,9 +76,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              Dimensions.verticalSpace(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -176,9 +174,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              Dimensions.verticalSpace(20),
               DefaultTabController(
                 length: 2,
                 child: Column(
@@ -234,9 +230,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(
-            height: 30,
-          ),
+          Dimensions.verticalSpace(30),
           Container(
             padding:
                 const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -254,9 +248,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                       "Auto Pause",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
+                    Dimensions.verticalSpace(5),
                     WidgetTooltip(
                       triangleColor: Colors.black12,
                       messageDecoration: const BoxDecoration(
@@ -306,9 +298,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          Dimensions.verticalSpace(20),
           Container(
             padding:
                 const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -354,9 +344,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                Dimensions.verticalSpace(10),
                 auctionLive
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -460,9 +448,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                           ],
                         ),
                       ),
-                const SizedBox(
-                  height: 10,
-                ),
+                Dimensions.verticalSpace(10),
                 auctionLive
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -621,9 +607,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
+                                  Dimensions.horizontalSpace(10),
                                   Text(
                                     _selectedDate2 == null
                                         ? '---'
@@ -664,9 +648,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          Dimensions.verticalSpace(10),
           auctionLive
               ? CustomButton(
                   onTap: () {
@@ -693,9 +675,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                           color: Theme.of(context)
                                               .colorScheme
                                               .surfaceDim)),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
+                                  Dimensions.verticalSpace(10),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
@@ -712,9 +692,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                           BlendMode.srcIn,
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
+                                      Dimensions.verticalSpace(10),
                                       const Text(
                                         "Do you want to STOP this auction?",
                                         textAlign: TextAlign.center,
@@ -722,9 +700,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                             fontSize: 24,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
+                                      Dimensions.verticalSpace(20),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -803,9 +779,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(
-                                        height: 30,
-                                      ),
+                                      Dimensions.verticalSpace(30),
                                     ],
                                   ),
                                 ],
@@ -868,9 +842,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .surfaceDim)),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
+                                      Dimensions.verticalSpace(10),
                                       Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -890,9 +862,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                               BlendMode.srcIn,
                                             ),
                                           ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
+                                          Dimensions.verticalSpace(10),
                                           Container(
                                               width: Dimensions.screenWidth(
                                                       context) *
@@ -926,9 +896,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                                       BlendMode.srcIn,
                                                     ),
                                                   ),
-                                                  const SizedBox(
-                                                    width: 10,
-                                                  ),
+                                                  Dimensions.horizontalSpace(10),
                                                   Text(
                                                     "2 franchises are offline",
                                                     style: Theme.of(context)
@@ -937,9 +905,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                                   ),
                                                 ],
                                               )),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
+                                          Dimensions.verticalSpace(10),
                                           const Text(
                                             "Do you want to RESUME this auction?",
                                             textAlign: TextAlign.center,
@@ -947,9 +913,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                                 fontSize: 24,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
+                                          Dimensions.verticalSpace(20),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -1033,9 +997,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(
-                                            height: 30,
-                                          ),
+                                          Dimensions.verticalSpace(30),
                                         ],
                                       ),
                                     ],
@@ -1055,9 +1017,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                     ),
                   ],
                 ),
-          const SizedBox(
-            height: 50,
-          )
+          Dimensions.verticalSpace(50),
         ],
       ),
     );
@@ -1092,9 +1052,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                   height: 40,
                   width: 40,
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                Dimensions.horizontalSpace(10),
                 Text(
                   "Phoenix",
                   style: Theme.of(context).textTheme.titleMedium,
@@ -1119,9 +1077,7 @@ class _SettingsSheetState extends State<SettingsSheet> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
+                Dimensions.horizontalSpace(10),
                 CircleAvatar(
                   radius: 22,
                   backgroundColor: Theme.of(context).colorScheme.primary,
